@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models
 {
     [Table("smartwatches", Schema = "pw_gruppo1")]
-    [Index(nameof(Id), IsUnique = true)]
     public class Smartwatch
     {
-        [Key]
         [Column("id")]
         public Guid Id { get; set; }
         [Column("position")]
