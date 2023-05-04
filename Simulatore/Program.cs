@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Models;
+using MongoDB.Driver;
 using Services.Intefaces;
 using Services.Services;
 
@@ -10,7 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<ISmartWatchService, SmartWatchService>();
+
 builder.Services.AddDbContext<WatchContext>(opt =>
 {
     opt.UseNpgsql("user id=postgres;password=password;host=localhost;database=postgres");

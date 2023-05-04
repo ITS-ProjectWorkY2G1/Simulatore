@@ -6,7 +6,6 @@ namespace Simulatore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class SimulatorController : ControllerBase
     {
         private readonly ISmartWatchService _smartWatchService;
@@ -15,12 +14,18 @@ namespace Simulatore.Controllers
             _smartWatchService = smartWatchService;
         }
         [HttpPost]
-        public async Task<IActionResult> RunSession(TimeSpan SessionTime, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> RunSession(short SessionTime, Guid userId, CancellationToken cancellationToken = default)
         {
             Guid watchId = Guid.NewGuid();
-            var userId = Guid.Parse(User.Claims.First(x => x.Type == "id").Value);
 
-            await _smartWatchService.CreateSessionAsync(watchId, userId, SessionTime, cancellationToken);
+            try
+            {
+                await _smartWatchService.CreateSessionAsync(watchId, userId, TimeSpan.FromMinutes(SessionTime), cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
             return Ok();
         }
