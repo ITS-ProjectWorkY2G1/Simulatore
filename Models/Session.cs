@@ -19,7 +19,7 @@ namespace Models
         public int SessionDistance { get; set; }
         [Column("pool_laps")]
         public short PoolLaps { get; set; }
-        [Column("pool_lenght")]
-        public short PoolLeght { get; set; }
+        [Column("pool_length")]
+        public short PoolLength { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Models.Migrations
 {
     [DbContext(typeof(WatchContext))]
-    partial class WatchContextModelSnapshot : ModelSnapshot
+    [Migration("20230508102119_fixNames")]
+    partial class fixNames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +40,9 @@ namespace Models.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("pool_laps");
 
-                    b.Property<short>("PoolLength")
+                    b.Property<short>("PoolLeght")
                         .HasColumnType("smallint")
-                        .HasColumnName("pool_length");
+                        .HasColumnName("pool_lenght");
 
                     b.Property<int>("SessionDistance")
                         .HasColumnType("integer")
