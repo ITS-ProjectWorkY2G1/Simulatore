@@ -19,10 +19,9 @@ namespace Services.Services
         {
             PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
             WatchContext context = new WatchContext();
-            using (IServiceScope scope = _serviceProvider.CreateScope())
-            {
-                context = scope.ServiceProvider.GetRequiredService<WatchContext>();
-            }
+            IServiceScope scope = _serviceProvider.CreateScope();
+            context = scope.ServiceProvider.GetRequiredService<WatchContext>();
+
             Random rnd = new Random();
 
             int latitude = rnd.Next(-89, 91);
@@ -41,7 +40,7 @@ namespace Services.Services
             {
                 SessionTime -= new TimeSpan(0, 0, 10);
 
-                smartwatch.Timestamp = DateTime.Now;
+                smartwatch.Timestamp = DateTime.UtcNow;
                 smartwatch.HeartRate = smartwatch.HeartRate + rnd.Next(-5, +5);
 
                 //preso coordinate random per nuova posizione nella piscina ma senza calcolare se segue la linea della corsia
@@ -57,10 +56,15 @@ namespace Services.Services
                 }
 
                 smartwatch.Position = $"{newPosition.Latitude}-{newPosition.Longitude}";
-
-                await context.AddAsync(smartwatch);
-                await context.SaveChangesAsync();
-
+                try
+                {
+                    await context.AddAsync(smartwatch);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
                 if (SessionTime.TotalSeconds <= 0) break;
             }
         }
