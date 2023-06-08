@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Intefaces;
+using Services.Interfaces;
 
 namespace Simulatore.Controllers
 {

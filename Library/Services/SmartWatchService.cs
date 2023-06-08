@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Models;
-using Services.Intefaces;
+using Services.Interfaces;
 
 namespace Services.Services
 {

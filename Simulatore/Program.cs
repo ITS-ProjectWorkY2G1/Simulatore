@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models;
-using Services.Intefaces;
+using Services.Interfaces;
 using Services.Services;
 
 
