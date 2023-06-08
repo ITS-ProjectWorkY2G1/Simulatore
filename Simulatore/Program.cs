@@ -1,10 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Models;
-using MongoDB.Driver;
 using Services.Intefaces;
 using Services.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +17,13 @@ builder.Services.AddScoped<ISmartWatchService, SmartWatchService>();
 
 builder.Services.AddDbContext<WatchContext>(opt =>
 {
-    opt.UseNpgsql("user id=postgres;password=password;host=localhost;database=postgres");
+    opt.UseNpgsql("user id=postgres;password=password;host=datadb.a5bybwhraxb4a0dk.westeurope.azurecontainer.io;database=postgres");
 });
+
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+    .AddEntityFrameworkStores<WatchContext>()
+    .AddDefaultTokenProviders();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
