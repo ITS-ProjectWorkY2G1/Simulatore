@@ -26,7 +26,8 @@ public partial class WatchContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.UseOpenIddict();
-
+        modelBuilder.Entity<Smartwatch>()
+            .HasKey(c => new { c.Id, c.Timestamp });
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
