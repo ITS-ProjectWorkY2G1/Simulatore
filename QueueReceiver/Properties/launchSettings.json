@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "QueueReceiver": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7057"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 34556,
+      "useSSL": false
+    }
+  }
+}
