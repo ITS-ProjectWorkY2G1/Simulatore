@@ -38,11 +38,11 @@ namespace QueueReceiver
         }
 
         [Function("QueueReceiver")]
-        public void Run([QueueTrigger("earth4sport", Connection = "queue")] string myQueueItem)
+        public void Run([QueueTrigger("earth4sport", Connection = "queue")] byte[] myQueueItem)
         {
-            //string jsonstring = Encoding.Unicode.GetString(myQueueItem);
+            string jsonstring = Encoding.Unicode.GetString(myQueueItem);
 
-            Smartwatch QueueItem = JsonSerializer.Deserialize<Smartwatch>(myQueueItem);
+            Smartwatch QueueItem = JsonSerializer.Deserialize<Smartwatch>(jsonstring);
 
             QueueItem.Timestamp = DateTime.UtcNow;
 
