@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,7 +19,7 @@ builder.Services.AddScoped<ISmartWatchService, SmartWatchService>();
 
 builder.Services.AddDbContext<WatchContext>(opt =>
 {
-    opt.UseNpgsql("user id=postgres;password=password;host=pwg1db.uksouth.cloudapp.azure.com;database=postgres");
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("db"));
 });
 
 
