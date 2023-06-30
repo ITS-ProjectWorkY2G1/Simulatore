@@ -1,4 +1,4 @@
-﻿namespace Services.Intefaces
+﻿namespace Services.Interfaces
 {
     public interface ISmartWatchService
     {
